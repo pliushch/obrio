@@ -23,14 +23,10 @@ const PlanetsList = () => {
     dispatch(fetchPlanets(next));
   };
 
-  const handleCardClick = (id: string) => {
-    // console.log(url);
-    // const idRegExp = /\/([0-9]*)\/$/;
-    // const id = url.match(idRegExp)[1]
-    // history.push(`/:${url}`);
+  const handleCardClick = (id: any) => {
+    history.push(id);
   };
 
-  if (loading) return <Spinner />;
   if (error) return <p>Error</p>;
 
   return (
@@ -42,24 +38,27 @@ const PlanetsList = () => {
             name: string;
             climate: string;
             population: string;
-            id: string
-          }) => (
-            <Planet
-              key={planet.id}
-              name={planet.name}
-              climate={planet.climate}
-              population={planet.population}
-              id={planet.id}
-              handleCardClick={handleCardClick}
-            />
-          )
+            id: string;
+          }) => {
+            return (
+              <Planet
+                {...planet}
+                key={planet.id}
+                handleCardClick={handleCardClick}
+              />
+            );
+          }
         )}
       </Grid>
 
-      {next && (
-        <Button onClick={handleClick} variant="contained" color="primary">
-          Load more
-        </Button>
+      {loading ? (
+        <Spinner />
+      ) : (
+        next && (
+          <Button onClick={handleClick} variant="contained" color="primary">
+            Load more
+          </Button>
+        )
       )}
     </div>
   );

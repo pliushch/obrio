@@ -8,8 +8,8 @@ export const getPlanets = async (url: string) => {
   };
 };
 
-export const getPlanetInfo = async (url: string) => {
-  return await axios.get(url);
+export const getPlanetInfo = async (id: string) => {
+  return await axios.get(`https://swapi.dev/api/planets${id}/`);
 };
 
 export const getPersonInfo = async (url: string) => {

@@ -13,16 +13,23 @@ interface IPlanet {
 const useStyles = makeStyles({
   root: {
     cursor: "pointer",
+    textAlign: "center",
   },
 });
 
-const Planet = ({ name, population, climate, handleCardClick, id }: IPlanet) => {
-  const handleClick = (id: string) => () => {
-    handleCardClick(id)
-  }
+const Planet = ({
+  name,
+  population,
+  climate,
+  handleCardClick,
+  id,
+}: IPlanet) => {
+  const handleClick = () => {
+    handleCardClick(id);
+  };
   const classes = useStyles();
   return (
-    <Grid item xs={3} onClick={handleClick(id)}>
+    <Grid item xs={3} onClick={handleClick}>
       <Card className={classes.root}>
         <CardContent>
           <Typography>Name: {name}</Typography>
