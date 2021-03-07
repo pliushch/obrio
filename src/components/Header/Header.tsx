@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers/rootReducer";
+import { RootReducerType } from "../../redux/reducers/rootReducer";
 import { Toolbar, Typography, AppBar } from "@material-ui/core";
 
 const Header = () => {
   const { count, planetsList } = useSelector(
-    (state: RootState) => state.planets
+    (state: RootReducerType) => state.planets
   );
 
   const pageCount = (count - planetsList.length) / 10;

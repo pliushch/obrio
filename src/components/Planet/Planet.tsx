@@ -1,13 +1,10 @@
 import React from "react";
 import { Card, CardContent, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { IPlanetsDetails } from "../../redux/actions/planets";
 
-interface IPlanet {
-  name: string;
-  population: string;
-  climate: string;
-  id: string;
-  handleCardClick: (id: string) => void;
+interface IProps extends IPlanetsDetails {
+  handlePlanetClick: (id: string) => void;
 }
 
 const useStyles = makeStyles({
@@ -21,11 +18,11 @@ const Planet = ({
   name,
   population,
   climate,
-  handleCardClick,
+  handlePlanetClick,
   id,
-}: IPlanet) => {
+}: IProps) => {
   const handleClick = () => {
-    handleCardClick(id);
+    handlePlanetClick(id);
   };
   const classes = useStyles();
   return (

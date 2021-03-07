@@ -2,7 +2,7 @@ import { Button, Grid } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPlanets } from "../../redux/actions/planets";
-import { RootState } from "../../redux/reducers/rootReducer";
+import { RootReducerType } from "../../redux/reducers/rootReducer";
 import Spinner from "../Spinner/Spinner";
 import Planet from "../Planet/Planet";
 import { useHistory } from "react-router-dom";
@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 const PlanetsList = () => {
   const history = useHistory();
   const { loading, error, planetsList, next } = useSelector(
-    (state: RootState) => state.planets
+    (state: RootReducerType) => state.planets
   );
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const PlanetsList = () => {
     dispatch(fetchPlanets(next));
   };
 
-  const handleCardClick = (id: any) => {
+  const handlePlanetClick = (id: any) => {
     history.push(id);
   };
 
@@ -33,18 +33,12 @@ const PlanetsList = () => {
     <div>
       <Grid container spacing={2}>
         {planetsList.map(
-          (planet: {
-            url: string;
-            name: string;
-            climate: string;
-            population: string;
-            id: string;
-          }) => {
+          (planet) => {
             return (
               <Planet
                 {...planet}
                 key={planet.id}
-                handleCardClick={handleCardClick}
+                handlePlanetClick={handlePlanetClick}
               />
             );
           }

@@ -3,22 +3,28 @@ import {
   FETCH_PLANETS_REQUESTED,
   FETCH_PLANETS_SUCCESS,
 } from "../const";
+import { PlanetsActionType, IPlanetsDetails } from "../actions/planets";
 
 const initialState = {
   loading: false,
-  error: null,
-  planetsList: [],
+  error: false,
+  planetsList: [] as Array<IPlanetsDetails>,
   count: 0,
-  next: null,
+  next: null as string | null,
 };
 
-const planetsReducer = (state = initialState, action: any): any => {
+type InitialState = typeof initialState;
+
+const planetsReducer = (
+  state = initialState,
+  action: PlanetsActionType
+): InitialState => {
   switch (action.type) {
     case FETCH_PLANETS_REQUESTED:
       return {
         ...state,
         loading: true,
-        error: null,
+        error: false,
       };
     case FETCH_PLANETS_SUCCESS:
       const { count, next, results } = action.info;
@@ -28,12 +34,13 @@ const planetsReducer = (state = initialState, action: any): any => {
         planetsList: [...state.planetsList, ...results],
         count,
         next,
-        error: null,
+        error: false,
       };
     case FETCH_PLANETS_FAILURE:
       return {
+        ...state,
         loading: false,
-        error: true,
+        error: false,
       };
     default:
       return state;
