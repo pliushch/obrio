@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getId } from "../helpers/getId";
 
 export const getPlanets = async (url: string) => {
   const { data } = await axios.get(url);
@@ -16,10 +17,10 @@ export const getPersonInfo = async (url: string) => {
   return await axios.get(url);
 };
 
-const getPlanetId = (url: string) => {
-  const idRegExp = /\/([0-9]*)\/$/;
-  const id: RegExpMatchArray | null = url.match(idRegExp);
-  return id ? id[1] : null;
+export const getPersonImage = async (id: string | null) => {
+  return await axios.get(
+    `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`
+  );
 };
 
 const _transformPlanet = (planet: {
@@ -28,7 +29,7 @@ const _transformPlanet = (planet: {
   climate: string;
   population: string;
 }) => ({
-  id: getPlanetId(planet.url),
+  id: getId(planet.url),
   name: planet.name,
   climate: planet.climate,
   population: planet.population,

@@ -4,52 +4,24 @@ import {
   FETCH_PLANET_INFO_REQUESTED,
   FETCH_PLANET_INFO_SUCCESS,
 } from "../const";
-import { getPersonInfo, getPlanetInfo } from "../../services/swapi";
+import {
+  getPersonImage,
+  getPersonInfo,
+  getPlanetInfo,
+} from "../../services/swapi";
 import { RootReducerType } from "../reducers/rootReducer";
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-
-type TPlanetInfoRequestedAction = {
-  type: typeof FETCH_PLANET_INFO_REQUESTED;
-};
-
-export type PlanetInfo = {
-  name: string;
-  rotation_period: string;
-  diameter: string;
-  climate: string;
-  gravity: string;
-  terrain: string;
-  population: string;
-  residents: Array<string>;
-};
-
-type TPlanetInfoLoadedAction = {
-  type: typeof FETCH_PLANET_INFO_SUCCESS;
-  info: PlanetInfo;
-};
-
-export type PersonInfo = {
-  name: string;
-  gender: string;
-  height: string;
-  mass: string;
-};
-
-type TPersonInfoLoadedAction = {
-  type: typeof FETCH_PERSON_INFO_SUCCESS;
-  info: Array<PersonInfo>;
-};
-
-type TPlanetInfoLoadedFailure = {
-  type: typeof FETCH_PLANET_INFO_FAILURE;
-};
-
-export type PlanetInfoActionType =
-  | TPlanetInfoRequestedAction
-  | TPlanetInfoLoadedAction
-  | TPlanetInfoLoadedFailure
-  | TPersonInfoLoadedAction;
+import { getId } from "../../helpers/getId";
+import {
+  PersonInfo,
+  PlanetInfo,
+  PlanetInfoActionType,
+  TPersonInfoLoadedAction,
+  TPlanetInfoLoadedAction,
+  TPlanetInfoLoadedFailure,
+  TPlanetInfoRequestedAction,
+} from "../../types/details";
 
 const planetInfoRequested = (): TPlanetInfoRequestedAction => ({
   type: FETCH_PLANET_INFO_REQUESTED,
@@ -88,8 +60,11 @@ export const fetchPlanetInfo = (id: string): ThunkType => async (
     const personInfo: Array<PersonInfo> = await Promise.all(
       planetInfo.residents.map(async (url: any) => {
         const { data: person } = await getPersonInfo(url);
+        const { config } = await getPersonImage(getId(person.url));
         return {
           name: person.name,
+          id: getId(url),
+          image: config.url,
           gender: person.gender,
           height: person.height,
           mass: person.mass,

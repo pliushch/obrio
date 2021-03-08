@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { IPlanetsDetails } from "../../redux/actions/planets";
+import { IPlanetsDetails } from "../../types/planets";
 
 interface IProps extends IPlanetsDetails {
   handlePlanetClick: (id: string) => void;

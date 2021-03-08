@@ -8,7 +8,7 @@ import {
   PersonInfo,
   PlanetInfo,
   PlanetInfoActionType,
-} from "../actions/details";
+} from "../../types/details";
 
 const initialState = {
   loading: false,

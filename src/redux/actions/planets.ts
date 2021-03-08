@@ -7,37 +7,13 @@ import { getPlanets } from "../../services/swapi";
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { RootReducerType } from "../reducers/rootReducer";
-
-type TPlanetsRequestedAction = {
-  type: typeof FETCH_PLANETS_REQUESTED;
-};
-
-type TPlanetsSuccessAction = {
-  type: typeof FETCH_PLANETS_SUCCESS;
-  info: any;
-};
-
-export interface IPlanetsDetails {
-  id: string
-  name: string
-  population: string
-  climate: string
-}
-
-type TPlanetsInfo = {
-  count: number,
-  next: string | null
-  results: Array<IPlanetsDetails>
-}
-
-type TPlanetsFailureAction = {
-  type: typeof FETCH_PLANETS_FAILURE;
-};
-
-export type PlanetsActionType =
-  | TPlanetsRequestedAction
-  | TPlanetsSuccessAction
-  | TPlanetsFailureAction;
+import {
+  PlanetsActionType,
+  TPlanetsFailureAction,
+  TPlanetsInfo,
+  TPlanetsRequestedAction,
+  TPlanetsSuccessAction,
+} from "../../types/planets";
 
 const planetsRequested = (): TPlanetsRequestedAction => ({
   type: FETCH_PLANETS_REQUESTED,

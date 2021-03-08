@@ -3,7 +3,7 @@ import {
   FETCH_PLANETS_REQUESTED,
   FETCH_PLANETS_SUCCESS,
 } from "../const";
-import { PlanetsActionType, IPlanetsDetails } from "../actions/planets";
+import { IPlanetsDetails, PlanetsActionType } from "../../types/planets";
 
 const initialState = {
   loading: false,
