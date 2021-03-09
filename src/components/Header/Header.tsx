@@ -10,15 +10,16 @@ const Header = () => {
 
   const pageCount = (count - planetsList.length) / 10;
   return (
-    <div>
-      <AppBar position="relative">
+    <>
+      <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6">
-            {pageCount ? `${pageCount} pages left` : null}
+            {pageCount ? `${pageCount} pages left` : "no more pages"}
           </Typography>
         </Toolbar>
       </AppBar>
-    </div>
+      <Toolbar />
+    </>
   );
 };
 

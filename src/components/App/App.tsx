@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import Header from "../Header/Header";
 import PlanetsList from "../PlanetsList/PlanetsList";
 import PlanetDetails from "../PlanetDetails/PlanetDetails";
+import { fetchPlanets } from "../../redux/actions/planets";
+import { useDispatch } from "react-redux";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPlanets());
+  }, [dispatch]);
+
   return (
-    <div>
-      <Header />
+    <ErrorBoundary>
       <Switch>
         <Route exact path="/" component={PlanetsList} />
         <Route exact path="/:id" component={PlanetDetails} />
         <Route render={() => <h1>Page not found</h1>} />
       </Switch>
-    </div>
+    </ErrorBoundary>
   );
-}
+};
 
 export default App;

@@ -10,7 +10,6 @@ export type TPlanetInfoRequestedAction = {
 };
 
 export type PlanetInfo = {
-  image: string;
   name: string;
   rotation_period: string;
   diameter: string;

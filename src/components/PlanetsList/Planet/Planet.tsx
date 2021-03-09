@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { IPlanetsDetails } from "../../types/planets";
+import { IPlanetsDetails } from "../../../types/planets";
 
 interface IProps extends IPlanetsDetails {
   handlePlanetClick: (id: string) => void;
@@ -21,10 +21,10 @@ const Planet = ({
   handlePlanetClick,
   id,
 }: IProps) => {
-  const handleClick = () => {
-    handlePlanetClick(id);
-  };
   const classes = useStyles();
+
+  const handleClick = () => handlePlanetClick(id);
+
   return (
     <Grid item xs={3} onClick={handleClick}>
       <Card className={classes.root}>
