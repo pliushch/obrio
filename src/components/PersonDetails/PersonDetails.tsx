@@ -7,6 +7,7 @@ interface IProps {
 }
 
 const PersonDetails = ({ person }: IProps) => {
+  if (!person.name) return null
   return (
     <Card>
       <CardContent>
