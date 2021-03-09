@@ -7,7 +7,7 @@ import App from "./components/App/App";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router basename="/obrio">
       <App />
     </Router>
   </Provider>,
