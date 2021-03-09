@@ -10,7 +10,7 @@ export type TPlanetsRequestedAction = {
 
 export type TPlanetsSuccessAction = {
   type: typeof FETCH_PLANETS_SUCCESS;
-  info: any;
+  info: TPlanetsInfo;
 };
 
 export interface IPlanetsDetails {

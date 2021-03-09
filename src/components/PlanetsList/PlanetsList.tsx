@@ -30,9 +30,7 @@ const PlanetsList = () => {
     dispatch(fetchPlanets(next));
   };
 
-  const handlePlanetClick = (id: any) => {
-    history.push(id);
-  };
+  const handlePlanetClick = (id: string) => history.push(id);
 
   if (error) return <ErrorIndicator />;
 

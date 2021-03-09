@@ -58,7 +58,7 @@ export const fetchPlanetInfo = (id: string): ThunkType => async (
   try {
     const { data: planetInfo } = await getPlanetInfo(id);
     const personInfo: Array<PersonInfo> = await Promise.all(
-      planetInfo.residents.map(async (url: any) => {
+      planetInfo.residents.map(async (url: string) => {
         const { data: person } = await getPersonInfo(url);
         const { config } = await getPersonImage(getId(person.url));
         return {
